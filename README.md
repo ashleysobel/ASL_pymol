@@ -23,4 +23,3 @@ Main Sections:
 
 Author: [Ashley Sobel Leonard]
 Date: [08/09/2024]
-"""
