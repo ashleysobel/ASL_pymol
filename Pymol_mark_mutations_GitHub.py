@@ -10,12 +10,10 @@
 # Instructions for running the code for a sequence or set of sequences: 
 # Option 1: Fill out the process_sequence() definition for each of the sequences. This will generate 2 views of the protein for each of the listed sequnces. The final sequence will remain visible in the pymol interface
 # Option 2: Copy and paste the entries for the process_sequence() definition one by one into the interface. This will generate and export the images, but will leave each structure visible.
-# Option 3: You can run each of the individual functions separately (see commented out code at the bottom of page), but remember to clear_all_selections() between seperate sampels to reset labelled residues
+# Option 3: You can run each of the individual functions separately, but remember to clear_all_selections() between seperate sampels to reset labelled residues
 
 from pymol import cmd
 import os
-
-print("test")
 
 # Constants 
 DEFAULT_OUTPUT_LOCATION = "/Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Python_code/ImageOutput/"
@@ -227,6 +225,7 @@ def generate_image(seq_name, view, protein, clade, subclade, output_location=Non
 # Example usage:
 # generate_image(seq_name='AAID1', view='side', protein='H1', clade='5a.2a', subclade='C.1.9')
 
+
 def process_sequence(seq_name, cif_file_path, strain_type, clade, subclade, H1_mutations, H2_mutations):
     """Process a sequence by setting up the base, assessing mutations, and generating images."""
     
@@ -243,17 +242,19 @@ def process_sequence(seq_name, cif_file_path, strain_type, clade, subclade, H1_m
     generate_image(seq_name=seq_name, view='side', protein='H1', clade=clade, subclade=subclade)
     generate_image(seq_name=seq_name, view='top', protein='H1', clade=clade, subclade=subclade)
     
+
 print("Loaded Functions")
+ 
 
-# Process a sequence
-process_sequence(seq_name='temp4',cif_file_path=cif_file_path,strain_type='H1N1',clade='5a.2',subclade= None,H1_mutations=[188],H2_mutations=[])
-process_sequence(seq_name='temp6',cif_file_path=cif_file_path,strain_type='H1N1',clade='5a.2a.1',subclade= 'D',H1_mutations=[],H2_mutations=[])
+# ----------------------------------------------
+# Manual Execution Instructions
+# ----------------------------------------------
+# To use this script, manually run the `process_sequence()` function in the PyMOL command line or script. 
 
-# If you prefer, following the running the initial code, you can each of the commands below separately by pasting them into the pymol interface for a more interactive method.
-# clear_all_selections()
-# set_base('/Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Hemagglutinin/H1/4lxv-assembly1.cif')
-# set_antigenic_sites('H1N1')
-# set_clade_subclade('5a.2', None)
-# assess_mutations_HA('temp', [142, 159,], [])
-# generate_image(seq_name='Grace-Test_top', view='top', protein='H1', clade='5a.2a', subclade='C.1')
-# clear_all_selections()
+# Example 1: Generate images for specific mutations
+# Copy and paste the following line into the PyMOL command line (has options filled out):
+process_sequence(seq_name='temp4', cif_file_path=cif_file_path, strain_type='H1N1', clade='5a.2', subclade=None, H1_mutations=[145, 188], H2_mutations=[100])
+
+# Example 2: Generate images with no mutations
+# Copy and paste the following line into the PyMOL command line (instructions for filling out command below):
+# process_sequence(seq_name='your_sequence_name', cif_file_path='/path_to_your_cif_file.cif', strain_type='H1N1', clade='your_clade', subclade='your_subclade', H1_mutations=[], H2_mutations=[])
