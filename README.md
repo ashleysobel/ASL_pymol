@@ -21,5 +21,29 @@ Main Sections:
 4. Process Sequence Function
 5. Main Execution Block
 
+## How to Use This Script
+
+### Running the Script in PyMOL
+
+This script is designed to be run directly in the PyMOL environment. Due to PyMOL's execution model, you need to manually run the `process_sequence()` function in the PyMOL command line after loading the script.
+
+### Step-by-Step Instructions
+
+1. **Load the Script in PyMOL**:
+   - Use the following command in the PyMOL command line to load the script:
+     ```
+     run /path/to/your/Pymol_mark_mutations_GitHub.py
+     ```
+
+2. **Run the `process_sequence()` Function**:
+   - Manually copy and paste one of the following commands into the PyMOL command line:
+   
+   **Example 1:**
+   ```python
+   process_sequence(seq_name='temp6', cif_file_path='/path_to_your_cif_file.cif', strain_type='H1N1', clade='5a.2a.1', subclade='D', H1_mutations=[], H2_mutations=[])
+
+
 Author: [Ashley Sobel Leonard]
 Date: [08/09/2024]
+
+
