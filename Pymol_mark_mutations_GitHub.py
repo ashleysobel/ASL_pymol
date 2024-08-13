@@ -18,8 +18,6 @@ import os
 # Constants 
 DEFAULT_OUTPUT_LOCATION = "/Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Python_code/ImageOutput/"
 DEFAULT_COLOR = 'grey70'
-cif_file_path = "/Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Hemagglutinin/H1/4lxv-assembly1.cif"
-strain_type = "H1N1"
 
 # ---------------------------------------------------
 # Initialization and Setup Functions
@@ -249,8 +247,11 @@ print("Loaded Functions")
 # ----------------------------------------------
 # Manual Execution Instructions
 # ----------------------------------------------
-# To use this script, manually run the `process_sequence()` function in the PyMOL command line or script. 
 
+# Set the path for the cif file
+cif_file_path = "/Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Hemagglutinin/H1/4lxv-assembly1.cif"
+
+# To use this script, manually run the `process_sequence()` function in the PyMOL command line or script. 
 # Example 1: Generate images for specific mutations
 # Copy and paste the following line into the PyMOL command line (has options filled out):
 process_sequence(seq_name='temp4', cif_file_path=cif_file_path, strain_type='H1N1', clade='5a.2', subclade=None, H1_mutations=[145, 188], H2_mutations=[100])
