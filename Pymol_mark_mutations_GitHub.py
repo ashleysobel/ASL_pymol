@@ -95,14 +95,92 @@ def set_antigenic_sites(strain_type):
         cmd.show('surface', site)
         cmd.set('surface_color', site, site)
 
-def set_clade_subclade(clade_name, subclade_name=None):
+def set_clade_subclade(strain_type, clade_name, subclade_name=None):
+    """Set and color the clade and optional subclade-defining mutations."""
+    subclade_name = f"Subclade_{subclade_name}" if subclade_name else None
+
+clade_residues = {
+    'H1N1': {
+        '5a.2': {'A+C+E': '74+97+129+162+163+164+185+216+256+295','B+D+F':'124'},
+        '5a.2a': {'A+C+E': '54+129+156+161+185+186+189+308'},
+        '5a.2a.1': {'A+C+E': '54+129+137+142+156+161+185+186+189+308'}
+    },
+    'H3N2': {
+        '2a.1':{
+            'A+A-2+A-3': '45+48+3+144+159+160+121+171+62+142+311+131+83+94+164+186+190+193+195+156+53+104+276',
+            'B+B-2+B-3': '160+77+155+200+193'
+        },
+        '2a.1b':{
+            'A+A-2+A-3': '45+48+3+144+159+160+121+171+62+142+311+131+83+94+164+186+190+193+195+156+53+104+276+140+299',
+            'B+B-2+B-3': '160+77+155+200+193'
+        },
+        '2b':{
+            'A+A-2+A-3': '45+48+3+144+159+160+121+171+62+142+311+131+83+94+164+186+190+193+195+50+79+140',
+            'B+B-2+B-3': '160+77+155+200+193'
+        }
+    }
+}
+
+    subclade_residues = {
+        'H1N1': {
+            '5a.2':{
+                'Subclade_C':{'A+C+E': '156+161'}
+            },
+            '5a.2a': {
+                'Subclade_C.1': {'A+C+E': '54+186+189+308'},
+                'Subclade_C.1.8': {'A+C+E': '54+186+189+308+120+47'},
+                'Subclade_C.1.9': {'A+C+E': '54+186+189+308+120+169'}
+            },
+            '5a.2a.1': {
+                'Subclade_C.1.1': {'A+C+E': '137+142'},
+                'Subclade_D': {'A+C+E': '54+186+189+308+216'},
+                'Subclade_D.1': {'A+C+E': '54+186+189+308+45+216'},
+                'Subclade_D.2': {'A+C+E': '54+186+189+308+113+216'},
+                'Subclade_D.3': {'A+C+E': '54+186+189+308+120', 'B+D+F': '45'}
+            }
+        },
+        'H3N2': {
+            # Add H3N2 subclade residues here
+        }
+    }
+
+    if strain_type not in clade_residues or strain_type not in subclade_residues:
+        print(f"Strain type {strain_type} not recognized. Please ensure the strain type is correct.")
+        return
+
+    if clade_name not in clade_residues[strain_type]:
+        print(f"Clade {clade_name} not recognized. Please ensure the clade name is correct.")
+        return
+
+    for chain_group, residues in clade_residues[strain_type][clade_name].items():
+        cmd.select(clade_name, f'chain {chain_group} and resi {residues}')
+        cmd.color('tv_blue', clade_name)
+        cmd.show('surface', clade_name)
+        cmd.set('surface_color', clade_name, clade_name)
+
+    if subclade_name:
+        if subclade_name in subclade_residues[strain_type].get(clade_name, {}):
+            for chain_group, residues in subclade_residues[strain_type][clade_name][subclade_name].items():
+                cmd.select(subclade_name, f'chain {chain_group} and resi {residues}')
+                cmd.color('tv_green', subclade_name)
+                cmd.show('surface', subclade_name)
+                cmd.set('surface_color', subclade_name, subclade_name)
+        else:
+            print(f"Subclade {subclade_name} does not match clade {clade_name}.")
+            return
+
     """Set and color the clade and optional subclade-defining mutations."""
     subclade_name = f"Subclade_{subclade_name}" if subclade_name else None
 
     clade_residues = {
-    	'5a.2': {'A+C+E': '74+97+129+162+163+164+185+216+256+295','B+D+F':'124'},
-        '5a.2a': {'A+C+E': '54+129+156+161+185+186+189+308'},
-        '5a.2a.1': {'A+C+E': '54+129+137+142+156+161+185+186+189+308'}
+        'H1N1':{
+            '5a.2': {'A+C+E': '74+97+129+162+163+164+185+216+256+295','B+D+F':'124'},
+            '5a.2a': {'A+C+E': '54+129+156+161+185+186+189+308'},
+            '5a.2a.1': {'A+C+E': '54+129+137+142+156+161+185+186+189+308'}
+        },
+        'H3N2':{
+            # Add H3N2 clade residues here
+        }
     }
     subclade_residues = {
     	'5a.2':{
@@ -233,7 +311,7 @@ def process_sequence(seq_name, cif_file_path, strain_type, clade, subclade, H1_m
     # Set up the base environment
     set_base(cif_file_path)
     set_antigenic_sites(strain_type)
-    set_clade_subclade(clade, subclade)
+    set_clade_subclade(strain_type,clade, subclade)
     
     # Assess mutations and generate images
     assess_mutations_HA(seq_name, H1_mutations, H2_mutations)
