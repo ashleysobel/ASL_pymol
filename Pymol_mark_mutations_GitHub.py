@@ -122,6 +122,14 @@ clade_residues = {
 }
 
     subclade_residues = {
+        'H3N2':{
+            '2a.1':{
+        },
+            '2a.1b':{
+        },
+        '2b':{
+         }
+        },
         'H1N1': {
             '5a.2':{
                 'Subclade_C':{'A+C+E': '156+161'}
