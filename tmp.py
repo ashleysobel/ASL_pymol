@@ -352,7 +352,7 @@ cif_file_path = "/Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Hema
 # To use this script, manually run the `process_sequence()` function in the PyMOL command line or script. 
 # Example 1: Generate images for specific mutations
 # Copy and paste the following line into the PyMOL command line (has options filled out):
-process_sequence(seq_name='temp4', cif_file_path=cif_file_path, strain_type='H1N1', clade='5a.2', subclade=None, H1_mutations=[142143], H2_mutations=[100],color='tv_red')
+process_sequence(seq_name='temp4', cif_file_path=cif_file_path, strain_type='H1N1', clade='5a.2', subclade=None, H1_mutations=[142+143], H2_mutations=[100],color='tv_red')
 
 # Example 2: Generate images with no mutations
 # Copy and paste the following line into the PyMOL command line (instructions for filling out command below):
