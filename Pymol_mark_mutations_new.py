@@ -1,7 +1,7 @@
 # Pymol_mark_mutations_GitHub.py
 
 # To run this code through pymol, copy: "run /path/to/code/location" into pymol command line input
-# Ex: run /Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Pymol_mark_mutations.py
+# Ex: run /Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Pymol_mark_mutations_new.py
 # Must update the following to run on a new computer: 
 # 1. DEFAULT_OUTPUT_LOCATION: set to wherever you want the images to be saved to
 # 2. cif_file_path: set this path to wherever your "4lxv-assembly1.cif" is saved to
@@ -352,7 +352,7 @@ cif_file_path = "/Users/ashleysobelleonard/code/CHOP_Pymol/CHOC-Prospective/Hema
 # To use this script, manually run the `process_sequence()` function in the PyMOL command line or script. 
 # Example 1: Generate images for specific mutations
 # Copy and paste the following line into the PyMOL command line (has options filled out):
-process_sequence(seq_name='temp4', cif_file_path=cif_file_path, strain_type='H1N1', clade='5a.2', subclade=None, H1_mutations=[142143], H2_mutations=[100],color='tv_red')
+process_sequence(seq_name=None, cif_file_path=cif_file_path, strain_type='H1N1', clade ='5a.2a.1', subclade='D1', H1_mutations=[], H2_mutations=[])
 
 # Example 2: Generate images with no mutations
 # Copy and paste the following line into the PyMOL command line (instructions for filling out command below):
